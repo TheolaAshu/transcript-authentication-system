@@ -11,13 +11,13 @@ const Navbar = () => {
      }
         
   return (
-    <div className='flex justify-between items center h-24  [max-w-1240px] mx-auto px-4 text-white'>
+    <div className='flex justify-between items center h-24  [max-w-1240px] mx-auto px-4 text-black'>
       <h1 className='w-full text-3xl font-bold text-[#00df9a]'>T-Scripty</h1>
 
       <ul className='hidden md:flex'>
         <li className='p-4' onClick={()=> navigate('/signup')}>Sign-up</li>
         <li className='p-4' onClick={()=> navigate('/login')}>Login</li>
-        <li className='p-4'>All Transcripts</li>
+        <li className='p-4' onClick={()=> navigate('/allTranscripts')}>All Transcripts</li>
         <li className='p-4'>Logout</li>
         
       </ul>
@@ -28,12 +28,11 @@ const Navbar = () => {
         <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>T-Scripty</h1>
 
         <ul className='uppercase p-4'>
-          <li className='p-4 border-b border-gray-600'>Home</li>
-          <li className='p-4 border-b border-gray-600'>Sign-up</li>
-          <li className='p-4 border-b border-gray-600'>Login</li>
-          <li className='p-4 border-b border-gray-600'>Logout</li>
-          <li className='p-4 border-b border-gray-600'>All Transcripts</li>
-          <li className='p-4'>Contact</li>
+          <li className='p-4 border-b border-gray-600 text-white'>Home</li>
+          <li className='p-4 border-b border-gray-600 text-white'onClick={()=> navigate('/signup')}>Sign-up</li>
+          <li className='p-4 border-b border-gray-600 text-white'onClick={()=> navigate('/login')}>Login</li>
+          <li className='p-4 border-b border-gray-600 text-white'onClick={()=> navigate('/allTranscripts')}>Alltranscripts</li>
+          <li className='p-4 border-b border-gray-600 text-white'onClick={()=> navigate('/logout')}>Logout</li>
         </ul>
       </div>
     </div> 

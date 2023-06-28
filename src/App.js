@@ -4,8 +4,11 @@ import{
 } from "react-router-dom"
 import Navbar from './components/Navbar';
 import Hero from "./components/Hero";
-import SignUp from "./pages/signUp";
-import Login from "./pages/login";
+import SignUp from "./pages/studentspg/signUp";
+import Login from "./pages/studentspg/login";
+import Alltranscripts from "./pages/studentspg/allTranscripts";
+import Adminlogin from "./pages/adminpg/adminlogin";
+
 
 
 
@@ -28,21 +31,31 @@ function App() {
             }
             />
             <Route
-            exact 
+            exact
             path="/signup"
             element={
-                <>
-                <SignUp/>
-        
-                </>
+              <>
+              <SignUp/>
+
+              </>
             }
-            />
+               />
             <Route
             exact 
             path="/login"
             element={
                 <>
                 <Login/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/allTranscripts"
+            element={
+                <>
+                <Alltranscripts/>
         
                 </>
             }
