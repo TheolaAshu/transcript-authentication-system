@@ -11,7 +11,8 @@ import Adminlogin from "./pages/adminpg/adminlogin";
 import Students from "./pages/adminpg/students";
 import LoadingPage from "./pages/adminpg/loading";
 import UploadPage from "./pages/adminpg/upload"
-
+import Validlogin from "./pages/validatorpg/validlogin";
+import VerifyingPage from "./pages/validatorpg/verify";
 
  
 function App() {
@@ -98,6 +99,26 @@ function App() {
             element={
                 <>
                 <Alltranscripts/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/validlogin"
+            element={
+                <>
+              <Validlogin/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/verify"
+            element={
+                <>
+              <VerifyingPage/>
         
                 </>
             }
