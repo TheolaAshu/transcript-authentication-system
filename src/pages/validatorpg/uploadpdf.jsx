@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function UploadPage() {
+function UploadPdf() {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -18,7 +18,7 @@ function UploadPage() {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="file">
-            Choose a transcript to upload:
+            Choose a pdf to upload:
           </label>
           <input
             type="file"
@@ -39,4 +39,4 @@ function UploadPage() {
   );
 }
 
-export default UploadPage;
+export default UploadPdf;

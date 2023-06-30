@@ -13,7 +13,8 @@ import LoadingPage from "./pages/adminpg/loading";
 import UploadPage from "./pages/adminpg/upload"
 import Validlogin from "./pages/validatorpg/validlogin";
 import VerifyingPage from "./pages/validatorpg/verify";
-
+import UploadPdf from "./pages/validatorpg/uploadpdf";
+import ValidationPage from "./pages/validatorpg/validnotvalid";
  
 function App() {
     return(
@@ -119,6 +120,26 @@ function App() {
             element={
                 <>
               <VerifyingPage/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/uploadpdf"
+            element={
+                <>
+              <UploadPdf/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/valid"
+            element={
+                <>
+              <ValidationPage/>
         
                 </>
             }
