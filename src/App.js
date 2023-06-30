@@ -10,7 +10,7 @@ import Alltranscripts from "./pages/studentspg/allTranscripts";
 import Adminlogin from "./pages/adminpg/adminlogin";
 import Students from "./pages/adminpg/students";
 import LoadingPage from "./pages/adminpg/loading";
-
+import UploadPage from "./pages/adminpg/upload"
 
 
  
@@ -47,6 +47,16 @@ function App() {
             element={
                 <>
               <LoadingPage/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/upload"
+            element={
+                <>
+              <UploadPage/>
         
                 </>
             }
