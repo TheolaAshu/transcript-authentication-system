@@ -3,8 +3,8 @@ import Typed from "react-typed";
 
 const Hero = () => {
   return (
-    <div className="text-white">
-      <div className="max-w-[800px] mt-[[-96px] w-full h-screen mx-auto text-center flex flex-col">
+    <div className="text-white bg-[#0c173b]">
+      <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center  flex flex-col items-center justify-center">
         <p className="text-white font-bold p-2">
           GET FEEDBACK ON YOUR PROGRESS
         </p>
@@ -24,7 +24,8 @@ const Hero = () => {
           />
         </div>
         <p className='md:text-2xl text-xl font-bold text-gray-500'>Monitor your school progress</p>
-        <button className='bg-[#21f5b2] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black'>Get Started</button>
+        <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-white'>Get Started</button>
+        <div className="mb-24"></div>
       </div>
     </div>
   );

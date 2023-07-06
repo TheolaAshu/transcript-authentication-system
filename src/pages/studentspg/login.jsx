@@ -3,7 +3,7 @@ import loginImg from '../assets/login.jpg'
 
 const Login = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full text-black'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full text-white'>
       <div className='hidden sm:block'>
         <img className= 'w-full h-full object-cover'src={loginImg} alt=''/>
       </div>

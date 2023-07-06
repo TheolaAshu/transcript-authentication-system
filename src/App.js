@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import{
     BrowserRouter as Router, Routes,Route,useNavigate,
 } from "react-router-dom"
@@ -17,6 +17,19 @@ import UploadPdf from "./pages/validatorpg/uploadpdf";
 import ValidationPage from "./pages/validatorpg/validnotvalid";
  
 function App() {
+
+ const [backendData, setBackendData] = useState([{}])
+   useEffect(() => {
+    fetch("http://localhost:5000/api").then(
+     response => response.json() 
+    ).then(
+     data => {
+      console.log(data);
+      setBackendData(data)
+     } 
+    )
+   },[])
+   
     return(
       
     
