@@ -15,9 +15,9 @@ const Navbar = () => {
       <h1 className='w-full text-3xl font-bold text-[#00df9a] p-8'>T-Scripty</h1>
 
       <ul className='hidden md:flex'>
-        <li className='p-9' onClick={()=> navigate('/signup')}>Signup</li>
-        <li className='p-9' onClick={()=> navigate('/login')}>Login</li>
-        <li className='p-9'>Logout</li>
+        <li className='p-5 bg-[#00df9a] w-[100px] rounded-full font-medium my-6 mx-8 text-center  py-3' onClick={()=> navigate('/signup')}>Signup</li>
+        <li className='p-5 bg-[#00df9a] w-[100px] rounded-full font-medium my-6 mx-8 text-center  py-3' onClick={()=> navigate('/login')}>Login</li>
+        <li className='p-5 bg-[#1ac096] w-[100px] rounded-full font-medium my-6 mx-8 text-center  py-3'>Logout</li>
         
       </ul>
       <div onClick={handleNav} className='block md:hidden'>

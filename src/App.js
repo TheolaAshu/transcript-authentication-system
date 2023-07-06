@@ -41,17 +41,7 @@ function App() {
             path="/hero"
             element={
                 <>
-              <Hero/>
-        
-                </>
-            }
-            />
-          <Route
-            exact 
-            path="/hero"
-            element={
-                <>
-              <Navbar/>
+              <Navbar/>, <Hero/>
         
                 </>
             }

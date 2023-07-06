@@ -1,7 +1,10 @@
 import React from "react";
 import Typed from "react-typed";
+import { useNavigate } from 'react-router-dom';
+
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="text-white bg-[#0c173b]">
       <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center  flex flex-col items-center justify-center">
@@ -24,7 +27,7 @@ const Hero = () => {
           />
         </div>
         <p className='md:text-2xl text-xl font-bold text-gray-500'>Monitor your school progress</p>
-        <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-white'>Get Started</button>
+        <button className='bg-[#1ac096] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-white'onClick={()=> navigate('/signup')} >Get Started</button>
         <div className="mb-24"></div>
       </div>
     </div>
