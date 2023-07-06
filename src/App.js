@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import{
     BrowserRouter as Router, Routes,Route,useNavigate,
 } from "react-router-dom"
-import Navbar from './components/Navbar';
-import Hero from "./components/Hero";
+import Navbar from './components/navbar';
+import Hero from "./components/hero";
 import SignUp from "./pages/studentspg/signUp";
 import Login from "./pages/studentspg/login";
 import Alltranscripts from "./pages/studentspg/allTranscripts";
@@ -36,6 +36,26 @@ function App() {
         
       <Router>
           <Routes>
+          <Route
+            exact 
+            path="/hero"
+            element={
+                <>
+              <Hero/>
+        
+                </>
+            }
+            />
+          <Route
+            exact 
+            path="/hero"
+            element={
+                <>
+              <Navbar/>
+        
+                </>
+            }
+            />
             <Route
             exact 
             path="/adminlogin"

@@ -1,7 +1,10 @@
 import React from 'react'
 import signupImg from '../assets/signup.jpg'
+import { useNavigate } from 'react-router-dom';
+
 
 const SignUp = () => {
+  const navigate = useNavigate();
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full text-white'>
      <div classname= 'hidden sm:block'>
@@ -11,7 +14,7 @@ const SignUp = () => {
 
 
       <div className='bg-gray-800 flex flex-col justify-center relative'>
-      <p className='absolute right-10 top-5'>Home</p>
+      <p className='absolute right-10 top-5'onClick={()=> navigate('/Hero')}> Home</p>
 
         <form className='max-w-[400px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg'>
           <h2 className='text-4xl dark:text-white font-bold text-center'>Signup</h2>

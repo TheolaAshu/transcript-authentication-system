@@ -12,12 +12,12 @@ const Navbar = () => {
         
   return (
     <div className='flex justify-between items center h-24  [max-w-1240px] mx-auto px-4 text-white drop-shadow-2xl shadow-slate-300 bg-[#0c173b]'>
-      <h1 className='w-full text-3xl font-bold text-[#00df9a]'>T-Scripty</h1>
+      <h1 className='w-full text-3xl font-bold text-[#00df9a] p-8'>T-Scripty</h1>
 
       <ul className='hidden md:flex'>
-        <li className='p-4' onClick={()=> navigate('/signup')}>Signup</li>
-        <li className='p-4' onClick={()=> navigate('/login')}>Login</li>
-        <li className='p-4'>Logout</li>
+        <li className='p-9' onClick={()=> navigate('/signup')}>Signup</li>
+        <li className='p-9' onClick={()=> navigate('/login')}>Login</li>
+        <li className='p-9'>Logout</li>
         
       </ul>
       <div onClick={handleNav} className='block md:hidden'>
