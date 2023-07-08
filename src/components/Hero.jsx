@@ -1,5 +1,5 @@
 import React from "react";
-import Typed from "react-typed";
+import Typed from "typed.js";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -18,7 +18,7 @@ const Hero = () => {
           <p className='md:text-5xl sm:text-4xl text-xl font-bold py-4'>
             Swift and Reliable 
           </p>
-          <Typed
+          <Typed 
           className='md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2' 
            strings={["[A]", "[B]", "[C]"]}
            typespeed={120}

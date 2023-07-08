@@ -15,6 +15,7 @@ import Validlogin from "./pages/validatorpg/validlogin";
 import VerifyingPage from "./pages/validatorpg/verify";
 import UploadPdf from "./pages/validatorpg/uploadpdf";
 import ValidationPage from "./pages/validatorpg/validnotvalid";
+import { AuthProvider } from "./Auth";
  
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
     return(
       
     
-        
+    <AuthProvider>  
       <Router>
           <Routes>
           <Route
@@ -86,7 +87,7 @@ function App() {
                 </>
             }
             />
-            <Route
+            {/* <Route
             exact 
             path="/"
             element={
@@ -96,7 +97,7 @@ function App() {
         
                 </>
             }
-            />
+            /> */}
             <Route
             exact
             path="/signup"
@@ -169,6 +170,7 @@ function App() {
             />
         </Routes>
       </Router>
+      </AuthProvider>
             
     );
 }

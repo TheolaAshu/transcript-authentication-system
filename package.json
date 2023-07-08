@@ -4,6 +4,10 @@
   "proxy": "http://localhost:3000",
   "private": true,
   "dependencies": {
+    "@firebase/analytics": "^0.10.0",
+    "@firebase/app": "^0.9.14",
+    "@firebase/auth": "^0.23.2",
+    "@firebase/firestore": "^3.13.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,7 +17,7 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.0",
     "react-scripts": "^5.0.1",
-    "react-typed": "^1.2.0",
+    "typed.js": "^2.0.16",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
