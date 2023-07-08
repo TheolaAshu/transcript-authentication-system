@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import { useNavigate } from 'react-router-dom';
 
 
 const Hero = () => {
   const navigate = useNavigate();
+  const el = useRef(null);
+
+  useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ["[A]", "[B]", "[C]"], // Strings to display
+      // Speed settings, try diffrent values untill you get good results
+      startDelay: 300,
+      typeSpeed: 100,
+      backSpeed: 100,
+      backDelay: 100
+    });
+
+    // Destropying
+    return () => {
+      typed.destroy();
+    };
+  }, []);
+
   return (
     <div className="text-white bg-[#0c173b]">
       <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center  flex flex-col items-center justify-center">
@@ -18,13 +36,14 @@ const Hero = () => {
           <p className='md:text-5xl sm:text-4xl text-xl font-bold py-4'>
             Swift and Reliable 
           </p>
-          <Typed 
+          {/* <Typed 
           className='md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2' 
            strings={["[A]", "[B]", "[C]"]}
            typespeed={120}
            backspeed={140}
            loop
-          />
+          /> */}
+          <span ref={el}></span>
         </div>
         <p className='md:text-2xl text-xl font-bold text-gray-500'>Monitor your school progress</p>
         <button className='bg-[#1ac096] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-white'onClick={()=> navigate('/signup')} >Get Started</button>

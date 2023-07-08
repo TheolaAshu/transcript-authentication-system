@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 import loginImg from '../assets/login.jpg'
 import { useNavigate } from 'react-router-dom'
 import {auth} from "../../firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 
 const Login = ({history}) => {
   const handleLogin =useCallback(async event => {
@@ -11,7 +11,7 @@ const Login = ({history}) => {
    const { email, password } = event.target.elements;
    try{
     await auth
-    .createUserWithEmailAndPassword(email.value, password.value);
+    .signInWithEmailAndPassword(email.value, password.value);
     history.push("/");
    } catch (error) {
     alert(error);
@@ -43,7 +43,7 @@ const Login = ({history}) => {
           </div>
           <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold rounded-lg'onClick={(e)=> { e.preventDefault();
           console.log(matricule+'@gmail.com');
-          createUserWithEmailAndPassword(auth, matricule+'@gmail.com', password)}}>Login</button>   
+          signInWithEmailAndPassword(auth, matricule+'@gmail.com', password)}}>Login</button>   
         </form>
       </div>
     </div>

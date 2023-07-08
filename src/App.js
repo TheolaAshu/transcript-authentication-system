@@ -43,8 +43,7 @@ function App() {
             element={
                 <>
               <Navbar/>, <Hero/>
-        
-                </>
+              </>
             }
             />
             <Route
@@ -87,7 +86,7 @@ function App() {
                 </>
             }
             />
-            {/* <Route
+           <Route
             exact 
             path="/"
             element={
@@ -97,7 +96,7 @@ function App() {
         
                 </>
             }
-            /> */}
+            />
             <Route
             exact
             path="/signup"

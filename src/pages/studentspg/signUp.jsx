@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import signupImg from '../assets/signup.jpg'
 import { useNavigate } from 'react-router-dom'
 import {auth} from "../../firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth'
+import { createUserWithEmailAndPassword } from '@firebase/auth'
 
 
 const SignUp = ({ history}) => {
