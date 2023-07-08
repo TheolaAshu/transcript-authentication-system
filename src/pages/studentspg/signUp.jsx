@@ -6,22 +6,33 @@ import { createUserWithEmailAndPassword } from '@firebase/auth'
 
 
 const SignUp = ({ history}) => {
-  const handleSignUp =useCallback(async event => {
-    event.preventDefault();
-   const { email, password } = event.target.elements;
+  const handleSignUp = async (e)  => {
+   setLoading(true);
    try{
-    await auth
-    .createUserWithEmailAndPassword(email.value, password.value);
-    history.push("/");
+  await   createUserWithEmailAndPassword(auth, matricule+'@gmail.com', password).then((e)=>{
+      console.log('done');
+    setLoading(false);
+    navigate("/alltranscripts");
+    }).catch((e)=>{
+      alert(e.message);
+    setLoading(false)
+    });
+
    } catch (error) {
     alert(error);
+    setLoading(false);
    }
-   }, [history]);
+   };
 
   const navigate = useNavigate();
   const [name, setname] = useState('');
   const [matricule, setmatricule] = useState('');
   const [password, setpassword] = useState('');
+  const [loading, setLoading] = useState('');
+
+  if(loading){
+    return <div>Loading</div>
+  }
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full text-white'>
@@ -48,9 +59,12 @@ const SignUp = ({ history}) => {
           <div className='flex justify-betweentext-gray-400 py-2'>
             <p className='flex items-center'><input className='mr-2' type="checkbox" /> Remember me</p>
           </div>
-          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold' onClick={(e) => { e.preventDefault();
-          console.log(matricule+'@gmail.com');
-          createUserWithEmailAndPassword(auth,  matricule+'@gmail.com', password)}}>Signup</button>
+          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold' onClick={
+            (e) => {
+               e.preventDefault();
+                handleSignUp();
+                }
+          }>Signup</button>
           <div><p className='my-5 py-2 text-gray-400'onClick={()=> navigate('/login')} >Already have an account?Login</p></div>
         </form>
       </div>
