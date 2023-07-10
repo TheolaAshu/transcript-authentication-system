@@ -12,7 +12,7 @@ const SignUp = ({ history}) => {
   await   createUserWithEmailAndPassword(auth, matricule+'@gmail.com', password).then((e)=>{
       console.log('done');
     setLoading(false);
-    navigate("/alltranscripts");
+    navigate("/transcripts");
     }).catch((e)=>{
       alert(e.message);
     setLoading(false)

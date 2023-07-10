@@ -1,17 +1,53 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 
 function UploadPdf() {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const file = e.target.files[0];
+    setFile(file);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add code to handle file upload here
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const url =
+      "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/CEC.pdf?alt=media&token=af0d74a4-9b19-4034-97c1-e675e193d02b";
+    axios
+      .get("http://localhost:5000/sign-pdf", {
+        params: {
+          pdfUrl: url,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
+  function handleGetHash() {
+    const url =
+      "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/files%2Fteola-file.pdf?alt=media&token=5e5f52f6-271e-4cb3-96b1-07c041b026eb";
+    axios
+      .get("http://localhost:5000/get-hash", {
+        params: {
+          pdfUrl: url,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   return (
     <div className="p-4">
@@ -35,6 +71,12 @@ function UploadPdf() {
           Upload
         </button>
       </form>
+      <button
+      onClick={handleGetHash}
+          className="bg-red-500 mt-6 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+        >
+          Verify Hash
+        </button>
     </div>
   );
 }

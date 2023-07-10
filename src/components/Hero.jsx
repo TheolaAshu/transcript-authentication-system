@@ -14,7 +14,7 @@ const Hero = () => {
       startDelay: 300,
       typeSpeed: 100,
       backSpeed: 100,
-      backDelay: 100
+      backDelay: 100,
     });
 
     // Destropying
@@ -36,13 +36,7 @@ const Hero = () => {
           <p className='md:text-5xl sm:text-4xl text-xl font-bold py-4'>
             Swift and Reliable 
           </p>
-          {/* <Typed 
-          className='md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2' 
-           strings={["[A]", "[B]", "[C]"]}
-           typespeed={120}
-           backspeed={140}
-           loop
-          /> */}
+
           <span ref={el}></span>
         </div>
         <p className='md:text-2xl text-xl font-bold text-gray-500'>Monitor your school progress</p>

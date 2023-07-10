@@ -6,11 +6,12 @@ import Navbar from './components/navbar';
 import Hero from "./components/hero";
 import SignUp from "./pages/studentspg/signUp";
 import Login from "./pages/studentspg/login";
-import Alltranscripts from "./pages/studentspg/allTranscripts";
+import Transcript from "./pages/studentspg/transcript";
+import Dashboard from "./pages/adminpg/dashboard";
 import Adminlogin from "./pages/adminpg/adminlogin";
+import AllTranscripts from "./pages/adminpg/allTranscripts";
 import Students from "./pages/adminpg/students";
-import LoadingPage from "./pages/adminpg/loading";
-import UploadPage from "./pages/adminpg/upload"
+import LoadingPage from "./pages/assets/loading";
 import Validlogin from "./pages/validatorpg/validlogin";
 import VerifyingPage from "./pages/validatorpg/verify";
 import UploadPdf from "./pages/validatorpg/uploadpdf";
@@ -20,16 +21,16 @@ import { AuthProvider } from "./Auth";
 function App() {
 
  const [backendData, setBackendData] = useState([{}])
-   useEffect(() => {
-    fetch("http://localhost:5000/api").then(
-     response => response.json() 
-    ).then(
-     data => {
-      console.log(data);
-      setBackendData(data)
-     } 
-    )
-   },[])
+  //  useEffect(() => {
+  //   fetch("http://localhost:5000/api").then(
+  //    response => response.json() 
+  //   ).then(
+  //    data => {
+  //     console.log(data);
+  //     setBackendData(data)
+  //    } 
+  //   )
+  //  },[])
    
     return(
       
@@ -78,10 +79,10 @@ function App() {
             />
             <Route
             exact 
-            path="/upload"
+            path="/dashboard/allTranscripts"
             element={
                 <>
-              <UploadPage/>
+              <AllTranscripts/>
         
                 </>
             }
@@ -119,10 +120,20 @@ function App() {
             />
             <Route
             exact 
-            path="/allTranscripts"
+            path="dashboard"
             element={
                 <>
-                <Alltranscripts/>
+                <Dashboard/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/transcript"
+            element={
+                <>
+                <Transcript/>
         
                 </>
             }

@@ -12,7 +12,7 @@ const Login = ({history}) => {
    try{
     await auth
     .signInWithEmailAndPassword(email.value, password.value);
-    history.push("/");
+    history.push("/transcript");
    } catch (error) {
     alert(error);
    }
@@ -41,7 +41,7 @@ const Login = ({history}) => {
             <label>Password</label>
             <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type ='password' onChange={(event) => {setpassword(event.target.value);}}/>
           </div>
-          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold rounded-lg'onClick={(e)=> { e.preventDefault();
+          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold rounded-lg'onClick={(e)=> { e.preventDefault(); handleLogin();
           console.log(matricule+'@gmail.com');
           signInWithEmailAndPassword(auth, matricule+'@gmail.com', password)}}>Login</button>   
         </form>
