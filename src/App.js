@@ -11,26 +11,27 @@ import Dashboard from "./pages/adminpg/dashboard";
 import Adminlogin from "./pages/adminpg/adminlogin";
 import AllTranscripts from "./pages/adminpg/allTranscripts";
 import Students from "./pages/adminpg/students";
+import UploadTrans from "./pages/adminpg/uploadTrans";
 import LoadingPage from "./pages/assets/loading";
 import Validlogin from "./pages/validatorpg/validlogin";
 import VerifyingPage from "./pages/validatorpg/verify";
 import UploadPdf from "./pages/validatorpg/uploadpdf";
 import ValidationPage from "./pages/validatorpg/validnotvalid";
 import { AuthProvider } from "./Auth";
- 
+
 function App() {
 
- const [backendData, setBackendData] = useState([{}])
-  //  useEffect(() => {
-  //   fetch("http://localhost:5000/api").then(
-  //    response => response.json() 
-  //   ).then(
-  //    data => {
-  //     console.log(data);
-  //     setBackendData(data)
-  //    } 
-  //   )
-  //  },[])
+//  const [backendData, setBackendData] = useState([{}])
+//    useEffect(() => {
+//     fetch("http://localhost:5000/api").then(
+//      response => response.json() 
+//     ).then(
+//      data => {
+//       console.log(data);
+//       setBackendData(data)
+//      } 
+//     )
+//    },[])
    
     return(
       
@@ -79,7 +80,7 @@ function App() {
             />
             <Route
             exact 
-            path="/dashboard/allTranscripts"
+            path="/alltranscripts"
             element={
                 <>
               <AllTranscripts/>
@@ -130,7 +131,7 @@ function App() {
             />
             <Route
             exact 
-            path="/transcript"
+            path="/transcripts"
             element={
                 <>
                 <Transcript/>
@@ -164,6 +165,16 @@ function App() {
             element={
                 <>
               <UploadPdf/>
+        
+                </>
+            }
+            />
+            <Route
+            exact 
+            path="/uploadtrans"
+            element={
+                <>
+              <UploadTrans/>
         
                 </>
             }

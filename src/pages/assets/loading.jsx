@@ -8,7 +8,7 @@ function LoadingPage() {
     // Simulate a delay in loading for 3 seconds
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1000);
 
     // Clean up the timeout when the component unmounts
     return () => clearTimeout(timeout);
@@ -24,7 +24,7 @@ function LoadingPage() {
     );
   }
 
-  return <div>upload successful</div>;
+  return <div>WELCOME</div>;
 
 }
 

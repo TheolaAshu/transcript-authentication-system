@@ -3,6 +3,7 @@ import signupImg from '../assets/signup.jpg'
 import { useNavigate } from 'react-router-dom'
 import {auth} from "../../firebase"
 import { createUserWithEmailAndPassword } from '@firebase/auth'
+import LoadingPage from '../assets/loading'
 
 
 const SignUp = ({ history}) => {
@@ -20,7 +21,7 @@ const SignUp = ({ history}) => {
 
    } catch (error) {
     alert(error);
-    setLoading(false);
+    setLoading(true);
    }
    };
 
@@ -31,7 +32,7 @@ const SignUp = ({ history}) => {
   const [loading, setLoading] = useState('');
 
   if(loading){
-    return <div>Loading</div>
+    return <LoadingPage/>
   }
 
   return (

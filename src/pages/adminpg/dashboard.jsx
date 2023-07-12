@@ -17,6 +17,9 @@ const Dashboard = () => {
           <li className="text-gray-400 hover:text-white cursor-pointer" onClick={()=> navigate('allTranscripts')}>
             Transcripts
           </li>
+          <li className="text-gray-400 hover:text-white cursor-pointer" onClick={()=> navigate('allTranscripts')}>
+            upload tramscripts
+          </li>
           <li className="text-gray-400 hover:text-white cursor-pointer">
             support requests
           </li>
