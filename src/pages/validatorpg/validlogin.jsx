@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Validlogin = () => {
+  const navigate = useNavigate();
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full text-black'>
             <div className='bg-gray-800 flex flex-col justify-center'>
@@ -14,7 +16,7 @@ const Validlogin = () => {
             <label>Password</label>
             <input className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type ='password'/>
           </div>
-          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold rounded-lg'>Login</button>
+          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/50 text-white font-semibold rounded-lg'onClick={()=> navigate('/uploadpdf')}>Login</button>
         </form>
       </div>
     </div>

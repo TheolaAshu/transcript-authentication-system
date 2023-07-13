@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import{
-    BrowserRouter as Router, Routes,Route,useNavigate,
-} from "react-router-dom"
-import Navbar from './components/navbar';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/navbar";
 import Hero from "./components/hero";
 import SignUp from "./pages/studentspg/signUp";
 import Login from "./pages/studentspg/login";
@@ -14,185 +12,155 @@ import Students from "./pages/adminpg/students";
 import UploadTrans from "./pages/adminpg/uploadTrans";
 import LoadingPage from "./pages/assets/loading";
 import Validlogin from "./pages/validatorpg/validlogin";
-import VerifyingPage from "./pages/validatorpg/verify";
+import VerifyingPage from "./pages/assets/verify";
 import UploadPdf from "./pages/validatorpg/uploadpdf";
-import ValidationPage from "./pages/validatorpg/validnotvalid";
-import { AuthProvider } from "./Auth";
+import ValidationPage from "./pages/assets/validnotvalid";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-
-//  const [backendData, setBackendData] = useState([{}])
-//    useEffect(() => {
-//     fetch("http://localhost:5000/api").then(
-//      response => response.json() 
-//     ).then(
-//      data => {
-//       console.log(data);
-//       setBackendData(data)
-//      } 
-//     )
-//    },[])
-   
-    return(
-      
-    
-    <AuthProvider>  
+  return (
+    <AuthProvider>
       <Router>
-          <Routes>
+        <Routes>
           <Route
-            exact 
+            exact
             path="/hero"
             element={
-                <>
-              <Navbar/>, <Hero/>
+              <>
+                <Navbar />, <Hero />
               </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/adminlogin"
             element={
-                <>
-              <Adminlogin/>
-        
-                </>
+              <>
+                <Adminlogin />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/students"
             element={
-                <>
-              <Students/>
-        
-                </>
+              <>
+                <Students />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/loading"
             element={
-                <>
-              <LoadingPage/>
-        
-                </>
+              <>
+                <LoadingPage />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/alltranscripts"
             element={
-                <>
-              <AllTranscripts/>
-        
-                </>
+              <>
+                <AllTranscripts />
+              </>
             }
-            />
-           <Route
-            exact 
+          />
+          <Route
+            exact
             path="/"
             element={
-                <>
-              <Navbar/>
-              <Hero/>
-        
-                </>
+              <>
+                <Navbar />
+                <Hero />
+              </>
             }
-            />
-            <Route
+          />
+          <Route
             exact
             path="/signup"
             element={
               <>
-              <SignUp/>
-
+                <SignUp />
               </>
             }
-               />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/login"
             element={
-                <>
-                <Login/>
-        
-                </>
+              <>
+                <Login />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="dashboard"
             element={
-                <>
-                <Dashboard/>
-        
-                </>
+              <>
+                <Dashboard />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/transcripts"
             element={
-                <>
-                <Transcript/>
-        
-                </>
+              <>
+                <Transcript />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/validlogin"
             element={
-                <>
-              <Validlogin/>
-        
-                </>
+              <>
+                <Validlogin />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/verify"
             element={
-                <>
-              <VerifyingPage/>
-        
-                </>
+              <>
+                <VerifyingPage />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/uploadpdf"
             element={
-                <>
-              <UploadPdf/>
-        
-                </>
+              <>
+                <UploadPdf />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/uploadtrans"
             element={
-                <>
-              <UploadTrans/>
-        
-                </>
+              <>
+                <UploadTrans />
+              </>
             }
-            />
-            <Route
-            exact 
+          />
+          <Route
+            exact
             path="/valid"
             element={
-                <>
-              <ValidationPage/>
-        
-                </>
+              <>
+                <ValidationPage />
+              </>
             }
-            />
+          />
         </Routes>
       </Router>
-      </AuthProvider>
-            
-    );
+    </AuthProvider>
+  );
 }
 export default App;
