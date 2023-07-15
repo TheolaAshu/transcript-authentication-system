@@ -182,11 +182,12 @@ const Navigation = () => {
           path="/verify"
           element={
             <>
-              {currentUser && currentUser?.role === "validator" ? (
+            <VerifyingPage/>
+              {/* {currentUser && currentUser?.role === "validator" ? (
                 <VerifyingPage />
               ) : (
                 <Navigate to="/validlogin" />
-              )}
+              )} */}
             </>
           }
         />
