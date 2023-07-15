@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const register = async (email, password, matricule, name) => {
+  const register = async (email, password, matricule, name, role) => {
     setLoading(true);
     const data = {
       email: email,
@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
         matricule,
         name,
         email,
+        role
       },
     };
     await fetch(`${BASE_URL}/auth/register`, {

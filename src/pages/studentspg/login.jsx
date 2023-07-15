@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import LoadingPage from "../assets/loading";
-import loginImg from "../assets/login.jpg";
+import loginImg from "../assets/Login-rafiki.png";
 import Alert from "../../components/alert";
 
 const Login = () => {

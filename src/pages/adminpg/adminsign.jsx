@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
-import signupImg from "../assets/Sign up-pana.png";
+import signupImg from "../assets/Sign up-amico.png";
 import { useNavigate } from "react-router-dom";
 import LoadingPage from "../assets/loading";
 import { AuthContext } from "../../context/AuthContext";
 import Alert from "../../components/alert";
 
-const SignUp = () => {
+const AdminSign = () => {
   const { register, loading, error, setError } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [name, setname] = useState("");
-  const [matricule, setmatricule] = useState("");
+  const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const navigation = useNavigate();
 
@@ -20,15 +20,9 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    await register(
-      matricule.toLowerCase() + "@gmail.com",
-      password,
-      matricule,
-      name,
-      'student'
-    );
+    await register(email, password, '', name, 'admin');
     if (!error) {
-      navigation("/login");
+      navigation("/adminlogin");
     }
   };
 
@@ -51,7 +45,7 @@ const SignUp = () => {
             onSubmit={handleSignUp}
           >
             <h2 className="text-4xl dark:text-white font-bold text-center">
-              Sign up
+              SIGN UP
             </h2>
             <div className="flex flex-col text-gray-400 py-2 ">
               <label>Name</label>
@@ -65,13 +59,13 @@ const SignUp = () => {
               />
             </div>
             <div className="flex flex-col text-gray-400 py-2 ">
-              <label>Matricule #</label>
+              <label>E-mail</label>
               <input
-                value={matricule}
+                value={email}
                 className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="text"
                 onChange={(event) => {
-                  setmatricule(event.target.value);
+                  setemail(event.target.value);
                 }}
               />
             </div>
@@ -100,7 +94,7 @@ const SignUp = () => {
             <div>
               <p
                 className="my-5 py-2 text-gray-400 hover:cursor-pointer"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/adminlogin")}
               >
                 Already have an account? Login
               </p>
@@ -113,4 +107,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default AdminSign;

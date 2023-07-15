@@ -1,30 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 import Box from '../../components/boxes';
+import { AdminSidebar } from '../../components/admin-sidebar';
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   return (
   
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="bg-gray-800 w-64 px-4 py-6">
-        <h2 className="text-white text-lg font-bold">Dashboard</h2>
-        <ul className="mt-6">
-          <li className="text-gray-400 hover:text-white cursor-pointer" onClick={()=> navigate('/students')}>
-            Students
-          </li>
-          <li className="text-gray-400 hover:text-white cursor-pointer" onClick={()=> navigate('allTranscripts')}>
-            Transcripts
-          </li>
-          <li className="text-gray-400 hover:text-white cursor-pointer" onClick={()=> navigate('allTranscripts')}>
-            upload tramscripts
-          </li>
-          <li className="text-gray-400 hover:text-white cursor-pointer">
-            support requests
-          </li>
-        </ul>
-      </div>
+      <AdminSidebar />
 
       {/* Main Content */}
       <div className="flex-1 bg-gray-100 px-4 py-6">

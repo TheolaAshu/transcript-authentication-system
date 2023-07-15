@@ -3,6 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import DropdownMenu from "../pages/assets/dropdown";
 
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
@@ -32,7 +33,7 @@ const Navbar = () => {
       <h1 className="w-full text-3xl font-bold text-[#00df9a] p-8">
         T-Scripty
       </h1>
-
+    
       <ul className="hidden md:flex">
         <li
           className="p-5 bg-[#00df9a] w-[100px] rounded-full font-medium my-6 mx-8 text-center  py-3"
@@ -82,9 +83,8 @@ const Navbar = () => {
         >
           <h1 className="w-full text-3xl font-bold text-[#00df9a] m-4">
             T-Scripty
-          </h1>
-
-          <ul className="uppercase p-4 bg-gray-500">
+          </h1> 
+            <ul className="uppercase p-4 bg-gray-500">
             <li
               className="p-4 border-b border-gray-600 text-white"
               onClick={() => navigate("/signup")}

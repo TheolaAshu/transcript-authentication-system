@@ -14,10 +14,12 @@ import Login from "./pages/studentspg/login";
 import Transcript from "./pages/studentspg/transcript";
 import Dashboard from "./pages/adminpg/dashboard";
 import Adminlogin from "./pages/adminpg/adminlogin";
+import AdminSign from "./pages/adminpg/adminsign";
 import AllTranscripts from "./pages/adminpg/allTranscripts";
 import Students from "./pages/adminpg/students";
 import UploadTrans from "./pages/adminpg/uploadTrans";
 import LoadingPage from "./pages/assets/loading";
+import ValidSign from "./pages/validatorpg/validsign";
 import Validlogin from "./pages/validatorpg/validlogin";
 import VerifyingPage from "./pages/assets/verify";
 import UploadPdf from "./pages/validatorpg/uploadpdf";
@@ -28,6 +30,15 @@ const Navigation = () => {
   return (
     <Router>
       <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Navbar />, <Hero />
+            </>
+          }
+        />
         <Route
           exact
           path="/hero"
@@ -48,15 +59,23 @@ const Navigation = () => {
         />
         <Route
           exact
+          path="/asignup"
+          element={
+            <>
+              <AdminSign />
+            </>
+          }
+        />
+        <Route
+          exact
           path="dashboard"
           element={
             <>
-            {currentUser && currentUser?.role === "admin" ? (
-                <Students />
+              {currentUser && currentUser?.role === "admin" ? (
+                <Dashboard />
               ) : (
                 <Navigate to="/adminlogin" />
               )}
-              <Dashboard />
             </>
           }
         />
@@ -75,29 +94,27 @@ const Navigation = () => {
         />
         <Route
           exact
-          path="/alltranscripts"
+          path="/allTranscripts"
           element={
             <>
-            {currentUser && currentUser?.role === "admin" ? (
-                <Students />
+              {currentUser && currentUser?.role === "admin" ? (
+                <AllTranscripts />
               ) : (
                 <Navigate to="/adminlogin" />
               )}
-              <AllTranscripts />
             </>
           }
         />
         <Route
           exact
-          path="/uploadtrans"
+          path="/uploadTrans"
           element={
             <>
-            {currentUser && currentUser?.role === "admin" ? (
-                <Students />
+              {currentUser && currentUser?.role === "admin" ? (
+                <UploadTrans />
               ) : (
                 <Navigate to="/adminlogin" />
               )}
-              <UploadTrans />
             </>
           }
         />
@@ -128,18 +145,26 @@ const Navigation = () => {
             </>
           }
         />
-        
+
         <Route
           exact
           path="/transcripts"
           element={
             <>
-            {currentUser && currentUser?.role === "student" ? (
-                <Students />
+              {currentUser && currentUser?.role === "student" ? (
+                <Transcript />
               ) : (
                 <Navigate to="/login" />
               )}
-              <Transcript />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/vsignup"
+          element={
+            <>
+              <ValidSign />
             </>
           }
         />
@@ -157,12 +182,11 @@ const Navigation = () => {
           path="/verify"
           element={
             <>
-            {currentUser && currentUser?.role === "validator" ? (
-                <Students />
+              {currentUser && currentUser?.role === "validator" ? (
+                <VerifyingPage />
               ) : (
                 <Navigate to="/validlogin" />
               )}
-              <VerifyingPage />
             </>
           }
         />
@@ -171,12 +195,11 @@ const Navigation = () => {
           path="/uploadpdf"
           element={
             <>
-            {currentUser && currentUser?.role === "validator" ? (
-                <Students />
+              {currentUser && currentUser?.role === "validator" ? (
+                <UploadPdf />
               ) : (
                 <Navigate to="/validlogin" />
               )}
-              <UploadPdf />
             </>
           }
         />

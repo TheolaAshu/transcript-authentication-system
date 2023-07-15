@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { AdminSidebar } from "../../components/admin-sidebar";
 
 function UploadTrans() {
   const [file, setFile] = useState(null);
@@ -12,7 +13,7 @@ function UploadTrans() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add code to handle file upload here
+    //Code to handle file upload here
     const formData = new FormData();
     formData.append("file", file);
 
@@ -32,25 +33,27 @@ function UploadTrans() {
       });
   };
 
-//   function handleGetHash() {
-//     const url =
-//       "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/files%2Fteola-file.pdf?alt=media&token=5e5f52f6-271e-4cb3-96b1-07c041b026eb";
-//     axios
-//       .get("http://localhost:5000/get-hash", {
-//         params: {
-//           pdfUrl: url,
-//         },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   }
+  //   function handleGetHash() {
+  //     const url =
+  //       "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/files%2Fteola-file.pdf?alt=media&token=5e5f52f6-271e-4cb3-96b1-07c041b026eb";
+  //     axios
+  //       .get("http://localhost:5000/get-hash", {
+  //         params: {
+  //           pdfUrl: url,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   }
 
   return (
-    <div className="p-4">
+    <div className="flex h-screen">
+      <AdminSidebar />
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="file">
