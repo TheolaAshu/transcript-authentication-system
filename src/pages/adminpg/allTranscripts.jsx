@@ -30,3 +30,4 @@ const AllTranscripts = () => {
 };
 
 export default AllTranscripts;
+
