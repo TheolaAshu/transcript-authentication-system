@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { AdminSidebar } from "../../components/admin-sidebar";
+import { AuthContext } from "../../context/AuthContext";
+import { BASE_URL } from "../../config";
 
 function SearchFilter() {
   const [searchValue, setSearchValue] = useState("");
+  const [users, setUsers] = useState([]);
+  const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    // Fetch users from Firebase
+    const getUsers = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/auth/students`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const usersData = await response.json();
+          setUsers(usersData);
+        } else {
+          console.error("Failed to fetch users:", response.status);
+          // Handle error
+        }
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+        // Handle error
+      }
+    };
+    getUsers();
+  }, [token]);
 
   const Students = [
     { id: 1, name: "John" },
@@ -19,7 +47,7 @@ function SearchFilter() {
     { id: 11, name: "Joseph" },
   ];
 
-  const filteredStudents = Students.filter((student) =>
+  const filteredStudents = users.filter((student) =>
     student.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
