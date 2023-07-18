@@ -16,7 +16,7 @@ const Validlogin = () => {
     event.preventDefault();
     console.log("================ Starting Logging ==================");
     event.preventDefault();
-    await login(email, password);
+    await login(email, password, 'validator');
 
     if (!loading && !error) {
       navigation("/uploadpdf");

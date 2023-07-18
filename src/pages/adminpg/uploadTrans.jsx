@@ -8,6 +8,7 @@ function UploadTrans() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const { token } = useContext(AuthContext);
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     // Fetch users from Firebase
@@ -54,51 +55,34 @@ function UploadTrans() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file || !selectedUser) return;
+    setIsloading(true);
+    if (!file || !selectedUser) {
+      return;
+    }
+    console.log(selectedUser);
     const formData = new FormData();
     formData.append("pdfFile", file);
-    try {
-      const response = await fetch(`${BASE_URL}/pdf/sign`, {
-        method: "POST",
-        body: formData,
-      });
-      if (response.ok) {
-        const { url, hash } = await response.json();
+    formData.append("user", selectedUser.id);
+
+    console.log(formData);
+
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+
+    await fetch(`${BASE_URL}/pdf/sign`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setIsloading(false);
+        console.log(data);
+        const { url, hash } = data;
         console.log(`PDF signed successfully. URL: ${url}, Hash: ${hash}`);
-        // Update the user's document with the PDF URL
-        try {
-          const updateResponse = await fetch(
-            `${BASE_URL}/users/${selectedUser.id}`,
-            {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ pdfUrl: url }),
-            }
-          );
-          if (updateResponse.ok) {
-            console.log("PDF URL updated in the user document");
-            // Do something with the signed PDF URL and hash
-          } else {
-            console.error(
-              "Failed to update user document:",
-              updateResponse.status
-            );
-            // Handle error
-          }
-        } catch (error) {
-          console.error("Failed to update user document:", error);
-          // Handle error
-        }
-      } else {
-        console.error("Failed to sign PDF:", response.status);
-        // Handle error
-      }
-    } catch (error) {
-      console.error("Failed to sign PDF:", error);
-      // Handle error
-    }
+      })
+      .catch((error) => {
+        console.error("Failed to sign PDF:", error);
+        setIsloading(false);
+      });
   };
 
   return (
@@ -155,21 +139,6 @@ function UploadTrans() {
                 setSelectedUser(
                   users.find((user) => user.id === e.target.value)
                 );
-                try {
-                  const response = await fetch(
-                    `${BASE_URL}/users/${e.target.value}`
-                  );
-                  if (response.ok) {
-                    const userData = await response.json();
-                    setSelectedUser(userData);
-                  } else {
-                    console.error("Failed to fetch user:", response.status);
-                    // Handle error
-                  }
-                } catch (error) {
-                  console.error("Failed to fetch user:", error);
-                  // Handle error
-                }
               }}
             >
               <option value="">Select a user</option>
@@ -180,13 +149,15 @@ function UploadTrans() {
               ))}
             </select>
           </div>
-          <button
-            type="submit"
-            className="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-600"
-            disabled={!file || !selectedUser}
-          >
-            Submit
-          </button>
+          <div className="w-full align-middle justify-center items-center flex">
+            <button
+              type="submit"
+              className="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-600 w-[20%]"
+              disabled={!file || !selectedUser}
+            >
+              {isLoading ? "Loading..." : "Submit"}
+            </button>
+          </div>
         </form>
       </div>
     </div>

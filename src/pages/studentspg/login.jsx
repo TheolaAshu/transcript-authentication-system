@@ -14,7 +14,7 @@ const Login = () => {
   const handleLogin = async (event) => {
     console.log("================ Starting Logging ==================");
     event.preventDefault();
-    await login(matricule.toLowerCase() + "@gmail.com", password);
+    await login(matricule.toLowerCase() + "@gmail.com", password, 'student');
 
     if (!loading && !error) {
       navigation("/transcripts");

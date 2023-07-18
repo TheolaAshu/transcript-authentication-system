@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [token, setToken] = useState('')
 
-  const login = async (email, password) => {
+  const login = async (email, password, role = 'student') => {
     setLoading(true)
     const data = {
       email: email,
@@ -25,6 +25,12 @@ export const AuthProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
+
+        if(role !== data.userProfileData.role){
+          setError('This account is not authorised to access this dashboard')
+          setLoading(false)
+          return
+        }
         if (data.userProfileData) {
           setCurrentUser(data.userProfileData);
           setToken(data.accessToken)

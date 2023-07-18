@@ -15,7 +15,7 @@ const Adminlogin = () => {
   const handleLogin = async (event) => {
     console.log("================ Starting Logging ==================");
     event.preventDefault();
-    await login(email, password);
+    await login(email, password, 'admin');
 
     if (!loading && !error) {
       navigation("/dashboard");

@@ -33,20 +33,6 @@ function SearchFilter() {
     getUsers();
   }, [token]);
 
-  const Students = [
-    { id: 1, name: "John" },
-    { id: 2, name: "Jane" },
-    { id: 3, name: "Bob" },
-    { id: 4, name: "kelvin" },
-    { id: 5, name: "Desmond" },
-    { id: 6, name: "Hans" },
-    { id: 7, name: "Alice" },
-    { id: 8, name: "Ajongafac" },
-    { id: 9, name: "Marion" },
-    { id: 10, name: "Joalice" },
-    { id: 11, name: "Joseph" },
-  ];
-
   const filteredStudents = users.filter((student) =>
     student.name.toLowerCase().includes(searchValue.toLowerCase())
   );
