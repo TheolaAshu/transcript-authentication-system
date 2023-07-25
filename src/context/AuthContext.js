@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((error) => {
         console.error("Error logging in user:", error);
-        setError(error);
+        setError(error.message);
         setLoading(false)
       });
   };
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => {
         setLoading(false);
         console.error("Error registering user:", error);
-        setError(error);
+        setError(error.message);
       });
   };
 

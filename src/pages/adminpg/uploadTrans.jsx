@@ -76,8 +76,8 @@ function UploadTrans() {
       .then((data) => {
         setIsloading(false);
         console.log(data);
-        const { url, hash } = data;
-        console.log(`PDF signed successfully. URL: ${url}, Hash: ${hash}`);
+        const { url, hash , signature} = data;
+        console.log(`PDF signed successfully. URL: ${url}, Hash: ${hash}, signature ${signature}`);
       })
       .catch((error) => {
         console.error("Failed to sign PDF:", error);

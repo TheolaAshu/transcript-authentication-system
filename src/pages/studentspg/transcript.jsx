@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Document, Page } from "react-pdf";
+import { Document, Page, pdfjs  } from "react-pdf";
 import { AuthContext } from "../../context/AuthContext";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 function Transcript() {
   const [numPages, setNumPages] = useState(null);
@@ -16,20 +17,24 @@ function Transcript() {
     <div className="max-w-screen-lg mx-auto">
       {url ? (
         <div>
-          {/* <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} />
-          </Document>
-          <p>
-            Page {pageNumber} of {numPages}
-          </p> */}
           <div>
+            <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+              {Array.from(new Array(numPages), (el, index) => (
+                <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+              ))}
+            </Document>
+            <p>
+              Page {pageNumber} of {numPages}
+            </p>
+          </div>
+          {/* <div>
             <embed
               src={url}
               type="application/pdf"
               width="100%"
-              height="1000px"
+              height="800px"
             />
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="text-center text-red-500 mt-4">

@@ -1,9 +1,41 @@
-import React from "react";
-import { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import { BASE_URL } from "../../config";
+import { AuthContext } from "../../context/AuthContext";
+import VerifyingPage from "../assets/verify";
+import ValidationPage from "../assets/validnotvalid";
 
-function UploadPdf() {
+function UploadTrans() {
   const [file, setFile] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const { token } = useContext(AuthContext);
+  const [isLoading, setIsloading] = useState(false);
+  const [isValid, setIsValid] = useState(null);
+  
+
+  useEffect(() => {
+    // Fetch users from Firebase
+    const getUsers = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/auth/students`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const usersData = await response.json();
+          setUsers(usersData);
+        } else {
+          console.error("Failed to fetch users:", response.status);
+          // Handle error
+        }
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+        // Handle error
+      }
+    };
+    getUsers();
+  }, [token]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -13,6 +45,7 @@ function UploadPdf() {
       setFile(null);
     }
   };
+
   const handleDrop = (e) => {
     e.preventDefault();
     const selectedFile = e.dataTransfer.files[0];
@@ -23,48 +56,53 @@ function UploadPdf() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add code to handle file upload here
+    setIsloading(true);
+    if (!file || !selectedUser) {
+      return;
+    }
+    console.log(selectedUser);
     const formData = new FormData();
-    formData.append("file", file);
+    console.log(selectedUser)
+    formData.append("pdfFile", file);
+    formData.append("hash", selectedUser.hash);
 
-    const url =
-      "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/CEC.pdf?alt=media&token=af0d74a4-9b19-4034-97c1-e675e193d02b";
-    axios
-      .get("http://localhost:5000/sign-pdf", {
-        params: {
-          pdfUrl: url,
-        },
-      })
-      .then((response) => {
-        console.log(response);
+    console.log(formData);
+
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+
+    await fetch(`${BASE_URL}/pdf/verify-pdf`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        setIsloading(false);
+        console.log(data);
+        const { success } = data;
+        setIsValid(success)
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Failed to sign PDF:", error);
+        setIsloading(false);
       });
   };
 
-  function handleGetHash() {
-    const url =
-      "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/files%2Fteola-file.pdf?alt=media&token=5e5f52f6-271e-4cb3-96b1-07c041b026eb";
-    axios
-      .get("http://localhost:5000/get-hash", {
-        params: {
-          pdfUrl: url,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  if(isValid !== null){ 
+    return (
+      <>
+        {isValid ? <VerifyingPage /> : <ValidationPage /> }
+      </>
+    )
   }
 
   return (
-    <div className=" flex h-screen ">
-      <div className="flex justify-center items-center w-full bg-gray-300">
+    <>
+      
+    <div className="flex h-screen">
+
+      <div className="flex-1 flex flex-col justify-center items-center bg-gray-300">
         <form
           onSubmit={handleSubmit}
           onDrop={handleDrop}
@@ -75,7 +113,7 @@ function UploadPdf() {
               className="block text-gray-800 font-bold mb-2"
               htmlFor="file"
             >
-              Choose a pdf to upload:
+              Drag and drop a TRANSCRIPT here or click to choose a file:
             </label>
             <input
               type="file"
@@ -99,171 +137,45 @@ function UploadPdf() {
               )}
             </div>
           </div>
-          <button
-            type="submit"
-            className="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-600"
-            disabled={!file}
-          >
-            Upload
-          </button>
-          <button
-            onClick={handleGetHash}
-            className="bg-blue-800 mt-6 text-white px-4 py-2 rounded-md hover:bg-blue-900 focus:outline-none focus:bg-blue-600"
-          >
-            Verify
-          </button>
+          <div className="mb-4 text-center">
+            <label
+              className="block text-gray-800 font-bold mb-2"
+              htmlFor="user"
+            >
+              Select a user to upload the transcript:
+            </label>
+            <select
+              id="user"
+              className="block w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              value={selectedUser ? selectedUser.id : ""}
+              onChange={async (e) => {
+                setSelectedUser(
+                  users.find((user) => user.id === e.target.value)
+                );
+              }}
+            >
+              <option value="">Select a user</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full align-middle justify-center items-center flex">
+            <button
+              type="submit"
+              className="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-600 w-[20%]"
+              disabled={!file || !selectedUser}
+            >
+              {isLoading ? "Loading..." : "Submit"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
+    </>
   );
 }
-export default UploadPdf;
 
-// import React, { useState } from "react";
-// import axios from "axios";
-
-// function UploadPdf() {
-//   const [file, setFile] = useState(null);
-//   const [isDragging, setIsDragging] = useState(false);
-
-//   const handleFileChange = (e) => {
-//     const selectedFile = e.target.files[0];
-//     if (selectedFile && selectedFile.type === "application/pdf") {
-//       setFile(selectedFile);
-//     } else {
-//       setFile(null);
-//     }
-//   };
-
-//   const handleDrop = (e) => {
-//     e.preventDefault();
-//     const selectedFile = e.dataTransfer.files[0];
-//     if (selectedFile && selectedFile.type === "application/pdf") {
-//       setFile(selectedFile);
-//     } else {
-//       setFile(null);
-//     }
-//     setIsDragging(false);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const formData = new FormData();
-//     formData.append("file", file);
-//     const url =
-//       "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/CEC.pdf?alt=media&token=af0d74a4-9b19-4034-97c1-e675e193d02b";
-//     axios
-//       .get("http://localhost:5000/sign-pdf", {
-//         params: {
-//           pdfUrl: url,
-//         },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-
-//   function handleGetHash() {
-//     const url =
-//       "https://firebasestorage.googleapis.com/v0/b/t-scripty.appspot.com/o/files%2Fteola-file.pdf?alt=media&token=5e5f52f6-271e-4cb3-96b1-07c041b026eb";
-//     axios
-//       .get("http://localhost:5000/get-hash", {
-//         params: {
-//           pdfUrl: url,
-//         },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   }
-
-//   return (
-//     <div className="flex h-screen">
-//       <div className="flex justify-center items-center w-full bg-gray-100">
-//         <form
-//           onSubmit={handleSubmit}
-//           onDrop={handleDrop}
-//           onDragOver={(e) => {
-//             e.preventDefault();
-//             setIsDragging(true);
-//           }}
-//           onDragLeave={() => setIsDragging(false)}
-//           className="flex flex-col items-center p-6 space-y-6 rounded-lg shadow-lg bg-white"
-//         >
-//           <label
-//             className="block text-center text-gray-800 font-bold mb-2"
-//             htmlFor="file"
-//           >
-//             Choose a PDF to upload:
-//           </label>
-//           <div
-//             className={`w-full h-60 border-2 border-dashed rounded-lg transition-colors duration-200 ${
-//               isDragging ? "border-green-500 bg-green-50" : "border-gray-300"
-//             }`}
-//             onClick={() => document.getElementById("file").click()}
-//           >
-//             {file ? (
-//               <p className="text-green-500 font-semibold truncate">
-//                 File selected: {file.name}
-//               </p>
-//             ) : (
-//               <>
-//                 <svg
-//                   className="w-16 h-16 mx-auto text-gray-400"
-//                   fill="none"
-//                   stroke="currentColor"
-//                   viewBox="0 0 24 24"
-//                   xmlns="http://www.w3.org/2000/svg"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     strokeWidth={2}
-//                     d="M15 19l-7-7 7-7"
-//                   />
-//                 </svg>
-//                 <p className="text-gray-400">
-//                   Drag and drop your file here or click to browse
-//                 </p>
-//                 <p className="text-sm text-gray-400">
-//                   (Only PDF files are allowed. Maximum file size: 10 MB)
-//                 </p>
-//               </>
-//             )}
-//           </div>
-//           <input
-//             type="file"
-//             id="file"
-//             className="hidden"
-//             onChange={handleFileChange}
-//             accept=".pdf"
-//           />
-//           <button
-//             type="submit"
-//             className={`${
-//               file
-//                 ? "bg-blue-500 hover:bg-blue-600 active:bg-blue-700 cursor-pointer"
-//                 : "bg-gray-400 cursor-not-allowed"
-//             } text-white px-4 py-2 rounded-md transition-colors duration-200`}
-//             disabled={!file}
-//           >
-//             Upload
-//           </button>
-//           <button
-//             onClick={handleGetHash}
-//             className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 focus-outline-none focus:bg-gray-700 transition-colors duration-200"
-//           >
-//             Verify
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-// export default UploadPdf
+export default UploadTrans;
